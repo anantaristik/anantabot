@@ -56,7 +56,7 @@ def message_handle(event):
 
                 + "3.) JarKom B\n"
 				+ "> Waktu: 15.00-16.40 WIB \n"
-                + "> Lokasi: daring \n\n"
+                + "> Lokasi: daring"
     )
     JADWAL_SELASA = ("[JADWAL KULIAH HARI SELASA] \n\nSemangat ya Ananta\n\n" 
 				+ "1.) StatProb A\n"
@@ -69,7 +69,7 @@ def message_handle(event):
 
                 + "3.) DAA C\n"
 				+ "> Waktu: 15.00-16.40 WIB \n"
-                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung) \n\n"
+                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung)"
     )
     JADWAL_RABU = ("[JADWAL KULIAH HARI RABU] \n\nSemangat ya Ananta\n\n" 
 				+ "1.) Anum C\n"
@@ -82,7 +82,7 @@ def message_handle(event):
 
                 + "3.) JarKom B\n"
 				+ "> Waktu: 13.00-14.40 WIB \n"
-                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung) \n\n"
+                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung)"
     )
     JADWAL_KAMIS= ("[JADWAL KULIAH HARI KAMIS] \n\nSemangat ya Ananta\n\n" 
 				+ "1.) StatProb A\n"
@@ -95,7 +95,7 @@ def message_handle(event):
 
                 + "3.) DAA C\n"
 				+ "> Waktu: 15.00-16.40 WIB \n"
-                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung) \n\n"
+                + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung)"
     )
 
     if users_msg == "ananta":
