@@ -16,3 +16,4 @@ line-bot-sdk
 XlsxWriter
 wrapt==1.10.11
 psycopg2-binary>=2.8.0,<3.0.0
+random
