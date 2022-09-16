@@ -16,11 +16,15 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
+# Quick-start development settings
+# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+# for best-practices.
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^'
+# Automatically determine environment by detecting if DATABASE_URL variable.
+# DATABASE_URL is provided by Heroku if a database add-on is added
+# (e.g. Heroku Postgres).
+PRODUCTION = os.getenv('SECRET_KEY') is not None
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
