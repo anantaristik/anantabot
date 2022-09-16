@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 # for best-practices.
-SECRET_KEY = os.getenv('SECRET_KEY', '-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^')
+SECRET_KEY = os.getenv('SECRET_KEY', '')
 
 # Automatically determine environment by detecting if DATABASE_URL variable.
 # DATABASE_URL is provided by Heroku if a database add-on is added
