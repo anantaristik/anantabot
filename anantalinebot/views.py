@@ -39,14 +39,8 @@ def callback(request):
 def message_handle(event):
     users_msg = event.message.text
 
-    if users_msg[:4].lower() == "!ananta":
-
-        users_msg = users_msg[5:].strip()
-
-        if users_msg == 'help':
-            response = "iya kenapa?"
-        elif users_msg == 'tes':
-            response = "masuk"
+    if users_msg == "ananta":
+        response = "itu aku!"
 
         line_bot_api.reply_message(
             event.reply_token,
