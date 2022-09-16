@@ -105,9 +105,9 @@ def message_handle(event):
             event.reply_token,
             TextSendMessage(text=response))
 
-    elif users_msg[:6].lower() == "!ananta":
+    elif users_msg[:7].lower() == "!ananta":
         
-        users_msg = users_msg[7:].strip()
+        users_msg = users_msg[8:].strip()
 
         if users_msg == "jadwal-senin":
             response = JADWAL_SENIN
