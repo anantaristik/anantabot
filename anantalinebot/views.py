@@ -121,7 +121,7 @@ def message_handle(event):
             TextSendMessage(text=response))
 
     else:
-        response = random.choice(list_random_msg)
+        response = str(random.choice(list_random_msg))
 
         line_bot_api.reply_message(
             event.reply_token,
