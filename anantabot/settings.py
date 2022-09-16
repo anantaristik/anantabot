@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -19,17 +20,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 # for best-practices.
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^')
+SECRET_KEY = os.getenv('SECRET_KEY', '-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^')
 
 # Automatically determine environment by detecting if DATABASE_URL variable.
 # DATABASE_URL is provided by Heroku if a database add-on is added
 # (e.g. Heroku Postgres).
 PRODUCTION = os.getenv('SECRET_KEY') is not None
 
+# Line settings
+if os.getenv('LINE_CHANNEL_ACCESS_TOKEN') is not None:
+    LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
+    LINE_CHANNEL_SECRET = os.getenv('LINE_CHANNEL_SECRET')
+else:
+    LINE_CHANNEL_ACCESS_TOKEN = ''
+    LINE_CHANNEL_SECRET = ''
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['anantalinebot.herokuapp.com']
 
 
 # Application definition
