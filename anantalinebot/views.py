@@ -43,6 +43,8 @@ def message_handle(event):
 
     list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!"]
 
+    not_found = str(random.choice(list_random_msg))
+
     JADWAL_SENIN = ("[JADWAL KULIAH HARI SENIN] \n\nSemangat ya Ananta\n\n" 
 				+ "1.) Anum C\n"
 				+ "> Waktu: 08.00-08.50 WIB \n"
@@ -121,7 +123,7 @@ def message_handle(event):
             TextSendMessage(text=response))
 
     else:
-        response = str(random.choice(list_random_msg))
+        response = not_found
 
         line_bot_api.reply_message(
             event.reply_token,
