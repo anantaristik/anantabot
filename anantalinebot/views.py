@@ -43,7 +43,8 @@ def message_handle(event):
 
     list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!", "ohh, ok", "sabar"]
     random_ya_tdk = ["ya", "mungkin", "tidak"]
-    random_pap = ["https://ibb.co/GHgR7Vp","https://ibb.co/BtY4xm3","https://ibb.co/M1HVHjZ","https://ibb.co/jyk8Frp","https://ibb.co/VLNgNRt"]
+    random_pap = ["https://i.ibb.co/qJbpBRj/S-89694212.jpg","https://i.ibb.co/470sGct/S-89694214.jpg","https://i.ibb.co/4SLTLDK/S-89694215.jpg",
+    "https://i.ibb.co/YcBNGLr/S-89694216.jpg","https://i.ibb.co/PrYcYKN/S-89694217.jpg"]
 
     not_found = str(random.choice(list_random_msg))
     tanya_anan = str(random.choice(random_ya_tdk))
