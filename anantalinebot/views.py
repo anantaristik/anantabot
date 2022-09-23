@@ -40,7 +40,6 @@ def callback(request):
 @handler.add(MessageEvent, message=TextMessage)
 def message_handle(event):
     users_msg = event.message.text
-    group_id = event.source.group_id
 
     list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!", "ohh, ok", "sabar"]
     random_ya_tdk = ["ya", "mungkin", "tidak"]
