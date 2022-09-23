@@ -1,4 +1,5 @@
 import random
+import os
 
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
@@ -6,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
-from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSendMessage
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
@@ -15,6 +16,15 @@ handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 def index(request):
     return HttpResponse("test!!")
 
+def get_source(event):
+    if event.source.type == 'user':
+        return {'bot_id':os.environ.get('bot_id', None), 'group_id':None, 'user_id':event.source.user_id}
+    elif event.source.type == 'group':
+        return {'bot_id':os.environ.get('bot_id', None), 'group_id':event.source.group_id, 'user_id':event.source.user_id}
+    elif event.source.type == 'room':
+        return {'bot_id':os.environ.get('bot_id', None), 'group_id':event.source.room_id, 'user_id':event.source.user_id}
+    else:
+        raise Exception('event.source.type:%s' % event.source.type)
 
 @csrf_exempt
 def callback(request):
@@ -40,12 +50,15 @@ def callback(request):
 @handler.add(MessageEvent, message=TextMessage)
 def message_handle(event):
     users_msg = event.message.text
+    group_id = event.source.group_id
 
     list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!", "ohh, ok", "sabar"]
     random_ya_tdk = ["ya", "mungkin", "tidak"]
+    random_pap = ["https://ibb.co/GHgR7Vp","https://ibb.co/BtY4xm3","https://ibb.co/M1HVHjZ","https://ibb.co/jyk8Frp","https://ibb.co/VLNgNRt"]
 
     not_found = str(random.choice(list_random_msg))
     tanya_anan = str(random.choice(random_ya_tdk))
+    pap_rand = random.choice(random_pap)
 
     JADWAL_SENIN = ("[JADWAL KULIAH HARI SENIN] \n\nSemangat ya Ananta\n\n" 
 				+ "1.) Anum C\n"
@@ -100,6 +113,15 @@ def message_handle(event):
                 + "> Lokasi: 3.3111-3.3112 (Ged C - Digabung)"
     )
 
+    HELP = ("[ANANTA BOT MESSAGE] \n\nIni bantuan untuk anantabot\n\n" 
+				+ "1.) Ketik 'ananta'\n" 
+				+ "> Biar penasaran aja.\n\n"
+				+ "2.) Ketik '!tanya pertanyaan'\n" 
+				+ "> (ex: '!tanya apakah ananta ganteng?')\n\n"
+				+ "3.) Ketik '!ananta jadwal-hari'\n"
+				+ "> Untuk melihat jadwal kuliah ananta\n\n"
+				)
+
     if users_msg == "ananta":
         response = "itu aku!"
 
@@ -119,6 +141,8 @@ def message_handle(event):
             response = JADWAL_RABU
         elif users_msg == "jadwal-kamis":
             response = JADWAL_KAMIS
+        elif users_msg == "help":
+            response = HELP
 
         line_bot_api.reply_message(
             event.reply_token,
@@ -130,6 +154,14 @@ def message_handle(event):
             event.reply_token,
             TextSendMessage(text=tanya_anan))
 
+    elif users_msg == "leave" or "left" or "cabut" or "keluar":
+        line_bot_api.leave_group(group_id)
+
+    elif users_msg == "pap":
+        line_bot_api.reply_message(
+            event.reply_token,
+            ImageSendMessage(original_content_url=pap_rand,
+            preview_image_url=pap_rand))
 
     else:
         response = not_found
