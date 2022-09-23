@@ -16,16 +16,6 @@ handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
 def index(request):
     return HttpResponse("test!!")
 
-def get_source(event):
-    if event.source.type == 'user':
-        return {'bot_id':os.environ.get('bot_id', None), 'group_id':None, 'user_id':event.source.user_id}
-    elif event.source.type == 'group':
-        return {'bot_id':os.environ.get('bot_id', None), 'group_id':event.source.group_id, 'user_id':event.source.user_id}
-    elif event.source.type == 'room':
-        return {'bot_id':os.environ.get('bot_id', None), 'group_id':event.source.room_id, 'user_id':event.source.user_id}
-    else:
-        raise Exception('event.source.type:%s' % event.source.type)
-
 @csrf_exempt
 def callback(request):
     if request.method == "POST":
@@ -153,9 +143,6 @@ def message_handle(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=tanya_anan))
-
-    elif users_msg == "leave" or "left" or "cabut" or "keluar":
-        line_bot_api.leave_group(group_id)
 
     elif users_msg == "pap":
         line_bot_api.reply_message(
