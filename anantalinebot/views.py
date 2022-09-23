@@ -41,7 +41,7 @@ def callback(request):
 def message_handle(event):
     users_msg = event.message.text
 
-    list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!"]
+    list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!", "ohh, ok", "sabar"]
     random_ya_tdk = ["ya", "mungkin", "tidak"]
 
     not_found = str(random.choice(list_random_msg))
@@ -126,11 +126,9 @@ def message_handle(event):
 
     elif users_msg[:6].lower() == "!tanya":
 
-        response = random_ya_tdk
-
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=response))
+            TextSendMessage(text=tanya_anan))
 
 
     else:
