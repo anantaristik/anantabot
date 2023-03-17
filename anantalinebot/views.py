@@ -1,5 +1,7 @@
 import random
-import os
+import openai
+
+openai.api_key = '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'
 
 from django.conf import settings
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
@@ -11,7 +13,6 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage, ImageSend
 
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(settings.LINE_CHANNEL_SECRET)
-
 
 def index(request):
     return HttpResponse("test!!")
@@ -41,13 +42,15 @@ def callback(request):
 def message_handle(event):
     users_msg = event.message.text
 
+    # Set up the model and prompt
+    model_engine = "text-davinci-003"
+
     list_random_msg = ["kenapa?", "gatau", "nanti coba lagi ya!", "ohh, ok", "sabar"]
     random_ya_tdk = ["ya", "mungkin", "tidak"]
     random_pap = ["https://i.ibb.co/qJbpBRj/S-89694212.jpg","https://i.ibb.co/470sGct/S-89694214.jpg","https://i.ibb.co/4SLTLDK/S-89694215.jpg",
     "https://i.ibb.co/YcBNGLr/S-89694216.jpg","https://i.ibb.co/PrYcYKN/S-89694217.jpg"]
 
     not_found = str(random.choice(list_random_msg))
-    tanya_anan = str(random.choice(random_ya_tdk))
     pap_rand = random.choice(random_pap)
 
     JADWAL_SENIN = ("[JADWAL KULIAH HARI SENIN] \n\nSemangat ya Ananta\n\n" 
@@ -139,10 +142,24 @@ def message_handle(event):
             TextSendMessage(text=response))
 
     elif users_msg[:6].lower() == "!tanya":
+        
+        prompt = users_msg[7:]
+        # Generate a response
+        completion = openai.Completion.create(
+            engine=model_engine,
+            prompt=prompt,
+            max_tokens=1024,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
+
+        response = completion.choices[0].text
+        print(response)
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=tanya_anan))
+            TextSendMessage(text=response))
 
     elif users_msg == "pap":
         line_bot_api.reply_message(
