@@ -7,7 +7,7 @@ gunicorn>=20.0.0,<21.0.0
 selenium>=3.141.0,<4.0.0
 whitenoise>=5.2.0,<6.0.0
 line-bot-sdk
-asgiref==3.5.1
+asgiref==3.5.2
 sqlparse==0.4.2
 tzdata==2022.1
 openai
