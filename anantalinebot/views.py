@@ -1,10 +1,10 @@
 import random
 import openai
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 from django.conf import settings
-from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 
 from linebot import LineBotApi, WebhookHandler

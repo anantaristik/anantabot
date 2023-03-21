@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 # for best-practices.
-SECRET_KEY = os.getenv('SECRET_KEY', '')
+SECRET_KEY = 'django-insecure-&o&+d!48bic0z0)i-94zlr!!3u+)92_ax0rvid3uts6tf#lch^'
 
 # Automatically determine environment by detecting if DATABASE_URL variable.
 # DATABASE_URL is provided by Heroku if a database add-on is added
@@ -38,7 +38,7 @@ else:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['anantalinebot.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -126,6 +126,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
@@ -133,7 +135,6 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Enable compression and caching features of whitenoise.
 # You can remove this if it causes problems on your setup.
